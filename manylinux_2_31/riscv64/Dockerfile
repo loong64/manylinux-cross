@@ -100,7 +100,8 @@ RUN echo 'Acquire::Retries "3";' > /etc/apt/apt.conf.d/80-retries && \
     cmake \
     llvm-dev \
     libclang-dev \
-    clang
+    clang \
+    patch
 
 ENV RISCV64_UNKNOWN_LINUX_GNU_OPENSSL_DIR=/usr/riscv64-unknown-linux-gnu/
 RUN add-apt-repository -y ppa:deadsnakes/ppa && \

@@ -97,7 +97,8 @@ RUN echo 'Acquire::Retries "3";' > /etc/apt/apt.conf.d/80-retries && \
     cmake \
     llvm-dev \
     libclang-dev \
-    clang
+    clang \
+    patch
 
 ENV LOONGARCH64_UNKNOWN_LINUX_GNU_OPENSSL_DIR=/usr/loongarch64-unknown-linux-gnu/
 RUN add-apt-repository -y ppa:deadsnakes/ppa && \
@@ -132,8 +133,9 @@ RUN cd /tmp && \
     VERS=3.7.17 && PREFIX=/opt/python/cp37-cp37m && \
     curl -LO https://www.python.org/ftp/python/$VERS/Python-$VERS.tgz && \
     tar xzf Python-$VERS.tgz && cd Python-$VERS && \
-    curl -LO 'https://git.savannah.gnu.org/cgit/config.git/plain/config.sub' && \
-    curl -LO 'https://git.savannah.gnu.org/cgit/config.git/plain/config.guess' && \
+    curl -LO 'https://github.com/cgitmirror/config/raw/refs/heads/master/config.sub' && \
+    curl -LO 'https://github.com/cgitmirror/config/raw/refs/heads/master/config.guess' && \
+    curl -sL https://github.com/loong64/docker-library/raw/refs/heads/main/python/Add-platform-triplets-for-64-bit-LoongArch.patch | patch -p1 && \
     ./configure CC=$TARGET_CC AR=$TARGET_AR READELF=$TARGET_READELF --host=loongarch64-unknown-linux-gnu --target=loongarch64-unknown-linux-gnu --prefix=$PREFIX --disable-shared --with-ensurepip=no --build=$(uname -m)-linux-gnu --disable-ipv6 ac_cv_have_long_long_format=yes ac_cv_file__dev_ptmx=no ac_cv_file__dev_ptc=no && \
     make -j4 && make -j4 install && \
     cd /tmp && rm -rf Python-$VERS.tgz Python-$VERS $PREFIX/share && \
@@ -148,8 +150,9 @@ RUN cd /tmp && \
     VERS=3.8.20 && PREFIX=/opt/python/cp38-cp38 && \
     curl -LO https://www.python.org/ftp/python/$VERS/Python-$VERS.tgz && \
     tar xzf Python-$VERS.tgz && cd Python-$VERS && \
-    curl -LO 'https://git.savannah.gnu.org/cgit/config.git/plain/config.sub' && \
-    curl -LO 'https://git.savannah.gnu.org/cgit/config.git/plain/config.guess' && \
+    curl -LO 'https://github.com/cgitmirror/config/raw/refs/heads/master/config.sub' && \
+    curl -LO 'https://github.com/cgitmirror/config/raw/refs/heads/master/config.guess' && \
+    curl -sL https://github.com/loong64/docker-library/raw/refs/heads/main/python/Add-platform-triplets-for-64-bit-LoongArch.patch | patch -p1 && \
     ./configure CC=$TARGET_CC AR=$TARGET_AR READELF=$TARGET_READELF --host=loongarch64-unknown-linux-gnu --target=loongarch64-unknown-linux-gnu --prefix=$PREFIX --disable-shared --with-ensurepip=no --build=$(uname -m)-linux-gnu --disable-ipv6 ac_cv_have_long_long_format=yes ac_cv_file__dev_ptmx=no ac_cv_file__dev_ptc=no && \
     make -j4 && make -j4 install && \
     cd /tmp && rm -rf Python-$VERS.tgz Python-$VERS $PREFIX/share && \
@@ -164,6 +167,7 @@ RUN cd /tmp && \
     VERS=3.9.22 && PREFIX=/opt/python/cp39-cp39 && \
     curl -LO https://www.python.org/ftp/python/$VERS/Python-$VERS.tgz && \
     tar xzf Python-$VERS.tgz && cd Python-$VERS && \
+    curl -sL https://github.com/loong64/docker-library/raw/refs/heads/main/python/Add-platform-triplets-for-64-bit-LoongArch.patch | patch -p1 && \
     ./configure CC=$TARGET_CC AR=$TARGET_AR READELF=$TARGET_READELF --host=loongarch64-unknown-linux-gnu --target=loongarch64-unknown-linux-gnu --prefix=$PREFIX --disable-shared --with-ensurepip=no --build=$(uname -m)-linux-gnu --disable-ipv6 ac_cv_have_long_long_format=yes ac_cv_file__dev_ptmx=no ac_cv_file__dev_ptc=no && \
     make -j4 && make -j4 install && \
     cd /tmp && rm -rf Python-$VERS.tgz Python-$VERS $PREFIX/share && \
@@ -178,6 +182,7 @@ RUN cd /tmp && \
     VERS=3.10.17 && PREFIX=/opt/python/cp310-cp310 && \
     curl -LO https://www.python.org/ftp/python/$VERS/Python-$VERS.tgz && \
     tar xzf Python-$VERS.tgz && cd Python-$VERS && \
+    curl -sL https://github.com/loong64/docker-library/raw/refs/heads/main/python/Add-platform-triplets-for-64-bit-LoongArch.patch | patch -p1 && \
     ./configure CC=$TARGET_CC AR=$TARGET_AR READELF=$TARGET_READELF --host=loongarch64-unknown-linux-gnu --target=loongarch64-unknown-linux-gnu --prefix=$PREFIX --disable-shared --with-ensurepip=no --build=$(uname -m)-linux-gnu --disable-ipv6 ac_cv_have_long_long_format=yes ac_cv_file__dev_ptmx=no ac_cv_file__dev_ptc=no && \
     make -j4 && make -j4 install && \
     cd /tmp && rm -rf Python-$VERS.tgz Python-$VERS $PREFIX/share && \
@@ -192,6 +197,7 @@ RUN cd /tmp && \
     VERS=3.11.12 && PREFIX=/opt/python/cp311-cp311 && \
     curl -LO https://www.python.org/ftp/python/$VERS/Python-$VERS.tgz && \
     tar xzf Python-$VERS.tgz && cd Python-$VERS && \
+    curl -sL https://github.com/loong64/docker-library/raw/refs/heads/main/python/Add-platform-triplets-for-64-bit-LoongArch.patch | patch -p1 && \
     ./configure CC=$TARGET_CC AR=$TARGET_AR READELF=$TARGET_READELF --host=loongarch64-unknown-linux-gnu --target=loongarch64-unknown-linux-gnu --prefix=$PREFIX  --disable-shared --with-build-python=python3.11 --with-ensurepip=no --build=$(uname -m)-linux-gnu --disable-ipv6 ac_cv_have_long_long_format=yes ac_cv_file__dev_ptmx=no ac_cv_file__dev_ptc=no && \
     make -j4 && make -j4 install && \
     cd /tmp && rm -rf Python-$VERS.tgz Python-$VERS $PREFIX/share && \
