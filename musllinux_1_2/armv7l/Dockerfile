@@ -17,7 +17,8 @@ RUN echo 'Acquire::Retries "3";' > /etc/apt/apt.conf.d/80-retries && \
     cmake \
     llvm-dev \
     libclang-dev \
-    clang
+    clang \
+    patch
 
 ENV ARMV7_UNKNOWN_LINUX_MUSLEABIHF_OPENSSL_DIR=/usr/armv7-unknown-linux-musleabihf/
 RUN add-apt-repository -y ppa:deadsnakes/ppa && \
